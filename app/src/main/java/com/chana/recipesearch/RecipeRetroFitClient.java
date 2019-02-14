@@ -2,7 +2,7 @@ package com.chana.recipesearch;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
-//import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecipeRetroFitClient {
 	
@@ -11,6 +11,6 @@ public class RecipeRetroFitClient {
 
 	RecipeService service = retrofit.create(RecipeService.class);
 
-	Call<RecipeFeedModel> mCall = service.getAllRecipes(null);
+//	Call<RecipeFeedModel> mCall = service.getAllRecipes(null);
 
 }
