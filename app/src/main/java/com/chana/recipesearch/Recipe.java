@@ -5,8 +5,16 @@ public class Recipe {
 	private String id;
 	private int rating;
 	private String [] ingredients;
-	
-	public Recipe(String recipeName, String id, int rating, String [] ingredients) {
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "recipeName='" + recipeName + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
+
+    public Recipe(String recipeName, String id, int rating, String [] ingredients) {
 
 		this.recipeName = recipeName;
 		this.id = id;

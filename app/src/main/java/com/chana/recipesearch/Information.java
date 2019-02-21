@@ -2,7 +2,7 @@ package com.chana.recipesearch;
 
 public class Information {
 
-    private String[] allNotKosher = {"shrimp", "crab", "lobster", "clam", "oyster",
+    public static final String[] allNotKosher = {"shrimp", "crab", "lobster", "clam", "oyster",
                                     "bacon", "pork", "ham", "pepperoni", "sausage"};
 
     private String[] allMilk = {"milk", "cream", "butter", "half and half", "cheese",

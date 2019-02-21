@@ -32,36 +32,52 @@ public class RecipeServiceTest {
 
 	RecipeClient recipeClient = new RecipeClient();
 
-	@Test
-	public void testGetAllRecipies() throws IOException {
+    @Test
+	public void testGetRandomRecipe() throws IOException {
 		// given
 
 		// when
-		TestObserver<List<Recipe>> observer = recipeClient.getAllRecipes(null, null)
+		TestObserver<List<Recipe>> observer = recipeClient.getRandomRecipe()
 				.test();
 
 		// then
         List<Recipe> recipes = observer.values().get(0);
-		List<Recipe> details = recipes.getMatches();
-		assertTrue(details.size() > 0);
+		//List<Recipe> details = recipes.getMatches();
+		assertTrue(recipes.size() > 0);
 		//String recipeName = details.get(0).getRecipeName();
 		//assertNotNull(recipeName.getName());
 	}
+
+//	@Test
+//	public void testGetAllRecipies() throws IOException {
+//		// given
+//
+//		// when
+//		TestObserver<List<Recipe>> observer = recipeClient.getAllRecipes(null, null)
+//				.test();
+//
+//		// then
+//        List<Recipe> recipes = observer.values().get(0);
+//		List<Recipe> details = recipes.getMatches();
+//		assertTrue(details.size() > 0);
+//		//String recipeName = details.get(0).getRecipeName();
+//		//assertNotNull(recipeName.getName());
+//	}
 	
-	@Test
-	public void testGetRecipeDetails() throws IOException {
-		// given
-
-		// when
-        TestObserver<RecipeModel> observer = service.getRecipeDetails("Lasagna-494544")
-                .test();
-
-		// then
-        RecipeModel model = observer.values().get(0);
-		Attribution details = model.getAttribution();
-		assertNotNull(details);
-		//String recipeName = details.get(0).getRecipeName();
-		//assertNotNull(recipeName.getName());
-	}
+//	@Test
+//	public void testGetRecipeDetails() throws IOException {
+//		// given
+//
+//		// when
+//        TestObserver<RecipeModel> observer = service.getRecipeDetails("Lasagna-494544")
+//                .test();
+//
+//		// then
+//        RecipeModel model = observer.values().get(0);
+//		Attribution details = model.getAttribution();
+//		assertNotNull(details);
+//		//String recipeName = details.get(0).getRecipeName();
+//		//assertNotNull(recipeName.getName());
+//	}
 
 }
