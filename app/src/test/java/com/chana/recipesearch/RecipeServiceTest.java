@@ -22,25 +22,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecipeServiceTest {
 
-	Retrofit retrofit = new Retrofit.Builder()
-			.baseUrl("http://api.yummly.com/v1/api/")
-			.addConverterFactory(GsonConverterFactory.create())
-			.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-			.build();
+//	Retrofit retrofit = new Retrofit.Builder()
+//			.baseUrl("http://api.yummly.com/v1/api/")
+//			.addConverterFactory(GsonConverterFactory.create())
+//			.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//			.build();
+//
+//	RecipeService service = retrofit.create(RecipeService.class);
 
-	RecipeService service = retrofit.create(RecipeService.class);
+	RecipeClient recipeClient = new RecipeClient();
 
 	@Test
 	public void testGetAllRecipies() throws IOException {
 		// given
 
 		// when
-		TestObserver<RecipeFeedModel> observer = service.getAllRecipes(null)
+		TestObserver<List<Recipe>> observer = recipeClient.getAllRecipes(null, null)
 				.test();
 
 		// then
-		RecipeFeedModel feedModel = observer.values().get(0);
-		List<Recipe> details = feedModel.getMatches();
+        List<Recipe> recipes = observer.values().get(0);
+		List<Recipe> details = recipes.getMatches();
 		assertTrue(details.size() > 0);
 		//String recipeName = details.get(0).getRecipeName();
 		//assertNotNull(recipeName.getName());
