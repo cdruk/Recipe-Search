@@ -1,5 +1,7 @@
 package com.chana.recipesearch;
 
+import android.support.annotation.VisibleForTesting;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
@@ -16,12 +18,19 @@ public enum FoodCategory {
     KOSHER("shrimp", "crab", "lobster", "clam", "oyster",
             "bacon", "pork", "ham", "pepperoni", "sausage");
 
+    @VisibleForTesting
     private List<String> prohibitedIngredients;
 
+    public List<String> getProhibitedIngredients() {
+        return prohibitedIngredients;
+    }
+
+    @VisibleForTesting
     FoodCategory(String... prohibitedIngredients) {
         this.prohibitedIngredients = Arrays.asList(prohibitedIngredients);
     }
 
+    @VisibleForTesting
     FoodCategory(FoodCategory a, FoodCategory b) {
         this.prohibitedIngredients = new ArrayList<>();
         this.prohibitedIngredients.addAll(a.prohibitedIngredients);
@@ -29,12 +38,17 @@ public enum FoodCategory {
     }
 
     public boolean isProhibited(String ingredient) {
-       return this.prohibitedIngredients.contains(ingredient);
+        for (String prohibitedIngredient: prohibitedIngredients) {
+            if (ingredient.toLowerCase().contains(prohibitedIngredient)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isProhibited(String[] ingredients) {
-        for (String ingredient:ingredients) {
-            if (isProhibited(ingredient)){
+        for (String ingredient : ingredients) {
+            if (isProhibited(ingredient)) {
                 return true;
             }
         }
