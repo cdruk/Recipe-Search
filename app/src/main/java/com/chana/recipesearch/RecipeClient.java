@@ -1,5 +1,6 @@
 package com.chana.recipesearch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -33,14 +34,15 @@ public class RecipeClient {
         return service.getAllRecipes(recipeQuery)
                 .map(RecipeFeedModel::getMatches)
                 .map(list -> {
+                    List<Recipe> kosherRecipes = new ArrayList<Recipe>();
                             for (Recipe recipe : list) {
                                 // loop through the recipes, get ingredients, remove anything that isn't kosher
                                 String[] ingredients = recipe.getIngredients();
                                 if (!KOSHER.isProhibited(ingredients) && !category.isProhibited(ingredients)) {
-                                    list.add(recipe);
+                                    kosherRecipes.add(recipe);
                                 }
                             }
-                            return list;
+                            return kosherRecipes;
                         }
                 );
     }

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public enum FoodCategory {
     // contains a list of milk products
@@ -39,7 +40,8 @@ public enum FoodCategory {
 
     public boolean isProhibited(String ingredient) {
         for (String prohibitedIngredient: prohibitedIngredients) {
-            if (ingredient.toLowerCase().contains(prohibitedIngredient)){
+            Pattern p = Pattern.compile("\\b"+prohibitedIngredient+"\\b", Pattern.CASE_INSENSITIVE);
+            if (p.matcher(ingredient).find()){
                 return true;
             }
         }

@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.chana.recipesearch.FoodCategory.KOSHER;
 import static com.chana.recipesearch.FoodCategory.MEAT;
 import static com.chana.recipesearch.FoodCategory.MILK;
 import static com.chana.recipesearch.FoodCategory.PARVE;
@@ -50,14 +51,16 @@ public class FoodCategoryTest {
     }
 
     @Test
+    public void testIsProhibitedSubString(){
+        String ingredient = "graham cracker crust";
+
+        assertFalse(KOSHER.isProhibited(ingredient));
+    }
+    @Test
     public void testFoodCategory(){
 
-        FoodCategory PARVE = new FoodCategory(MILK, MEAT);
+        assertTrue(PARVE.getProhibitedIngredients().containsAll(MILK.getProhibitedIngredients()));
+        assertTrue(PARVE.getProhibitedIngredients().containsAll(MEAT.getProhibitedIngredients()));
 
-        List<String> parve = Arrays.asList("milk", "cream", "butter", "half and half", "cheese",
-                "mozzarella", "parmesan", "beef", "chicken", "lamb", "meat", "turkey", "veal",
-                "salami", "pastrami");
-
-        assertTrue(PARVE.getProhibitedIngredients() = parve);
     }
 }
