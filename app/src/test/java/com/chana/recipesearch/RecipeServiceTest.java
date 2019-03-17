@@ -57,15 +57,15 @@ public class RecipeServiceTest {
         // then
         List<Recipe> recipes = observer.values().get(0);
         assertEquals("Lasagna-2281977", recipes.get(0).getId());
-//        assertEquals("Miracle-Lasagna-Allrecipes", recipes.get(1).getId());
-//        assertEquals("Lasagna-2411433", recipes.get(2).getId());
-//        assertEquals("Lasagna-Allrecipes", recipes.get(3).getId());
-//        assertEquals("Lasagna-Formaggio-1360903", recipes.get(4).getId());
-//        assertEquals("Lasagna-2003394", recipes.get(5).getId());
-//        assertEquals("Bertolli-lasagna-304071", recipes.get(6).getId());
-//        assertEquals("Lasagna-Rounds-1060438", recipes.get(7).getId());
-//        assertEquals("Spinach-Lasagna-Rolls-2254756", recipes.get(8).getId());
-//        assertEquals("Easiest-Ever-Spinach-Lasagna-1953020", recipes.get(9).getId());
+        assertEquals("Miracle-Lasagna-Allrecipes", recipes.get(1).getId());
+        assertEquals("Lasagna-2411433", recipes.get(2).getId());
+        //assertEquals("Lasagna-Allrecipes", recipes.get(3).getId());
+        assertEquals("Lasagna-Formaggio-1360903", recipes.get(3).getId());
+        assertEquals("Lasagna-2003394", recipes.get(4).getId());
+        assertEquals("Bertolli-lasagna-304071", recipes.get(5).getId());
+        assertEquals("Lasagna-Rounds-1060438", recipes.get(6).getId());
+        assertEquals("Spinach-Lasagna-Rolls-2254756", recipes.get(7).getId());
+       // assertEquals("Easiest-Ever-Spinach-Lasagna-1953020", recipes.get(8).getId());
     }
 
 //	@Test

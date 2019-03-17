@@ -12,7 +12,7 @@ public interface RecipeService {
 	Single<RecipeFeedModel> getRandomRecipe();
 
 	@GET("recipes?_app_id=c12793b5&_app_key=d946a1a08cac90f10c834351a99717de")
-	Single<RecipeFeedModel> getAllRecipes(@Query("q") String recipeQuery);
+	Single<RecipeFeedModel> getAllRecipes(@Query("q") String recipeQuery , @Query("excludedIngredient[]") String [] excluded );
 
 	@GET("recipe/{recipe-id}?_app_id=c12793b5&_app_key=d946a1a08cac90f10c834351a99717de")
 	Single<RecipeModel> getRecipeDetails(@Path("recipe-id") String recipeId);

@@ -56,4 +56,14 @@ public enum FoodCategory {
         }
         return false;
     }
+
+    public String[] excluded() {
+        ArrayList<String> excluded = new ArrayList();
+//        for (String ingredient : KOSHER.prohibitedIngredients)
+//            excluded.add("&excludedIngredient=" + ingredient);
+        for (String ingredient : prohibitedIngredients)
+            excluded.add(ingredient);
+
+        return excluded.toArray(new String[0]);
+    }
 }
