@@ -66,20 +66,18 @@ public class RecipeServiceTest {
         assertEquals("Spinach-Lasagna-Rolls-2254756", recipes.get(7).getId());
     }
 
-//	@Test
-//	public void testGetRecipeDetails() throws IOException {
-//		// given
-//
-//		// when
-//        TestObserver<RecipeModel> observer = service.getRecipeDetails("Lasagna-494544")
-//                .test();
-//
-//		// then
-//        RecipeModel model = observer.values().get(0);
-//		Attribution details = model.getAttribution();
-//		assertNotNull(details);
-//		//String recipeName = details.get(0).getRecipeName();
-//		//assertNotNull(recipeName.getName());
-//	}
+	@Test
+	public void testGetRecipeDetails() throws IOException {
+		// given
+
+		// when
+        TestObserver<RecipeModel> observer = recipeClient.getRecipeDetails("Lasagna-494544")
+                .test();
+
+		// then
+        RecipeModel model = observer.values().get(0);
+		Attribution details = model.getAttribution();
+		assertNotNull(details);
+	}
 
 }

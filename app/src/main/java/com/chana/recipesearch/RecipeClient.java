@@ -43,14 +43,8 @@ public class RecipeClient {
     }
 
 
-//    Single<RecipeModel> getRecipeDetails(String recipeId) {
-//        return service.getRecipeDetails(recipeId)
-//                .map(RecipeModel::getIngredientLines)
-//                .map(list -> {
-//                    RecipeModel recipeModel = new RecipeModel();
-//                    list.add(recipeModel);
-//                    return list;
-//                });
-//    }
+    Single<RecipeModel> getRecipeDetails(String recipeId) {
+        return service.getRecipeDetails(recipeId);
+    }
 
 }
