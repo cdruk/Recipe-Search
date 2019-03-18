@@ -12,11 +12,6 @@ import static com.chana.recipesearch.FoodCategory.KOSHER;
 
 public class RecipeClient {
 
-    private Information information = new Information();
-    private String[] allNotKosher = information.getAllNotKosher();
-    private String[] allMeat = information.getAllMeat();
-    private String[] allMilk = information.getAllMilk();
-
 
     Retrofit retrofit = new Retrofit.Builder().baseUrl("http://api.yummly.com/v1/api/")
             .addConverterFactory(GsonConverterFactory.create())

@@ -58,11 +58,8 @@ public enum FoodCategory {
     }
 
     public String[] excluded() {
-        ArrayList<String> excluded = new ArrayList();
-//        for (String ingredient : KOSHER.prohibitedIngredients)
-//            excluded.add("&excludedIngredient=" + ingredient);
-        for (String ingredient : prohibitedIngredients)
-            excluded.add(ingredient);
+        ArrayList<String> excluded = new ArrayList(KOSHER.prohibitedIngredients);
+        excluded.addAll(prohibitedIngredients);
 
         return excluded.toArray(new String[0]);
     }
