@@ -2,7 +2,7 @@ package com.chana.recipesearch;
 
 public class RecipeDetails {
 
-	private  String Url;
+	private String Url;
 
 	public RecipeDetails(String url) {
 		Url = url;
