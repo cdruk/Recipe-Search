@@ -5,6 +5,7 @@ public class Recipe {
 	private String id;
 	private int rating;
 	private String [] ingredients;
+	private Object attributes;
 
     @Override
     public String toString() {
@@ -14,12 +15,13 @@ public class Recipe {
                 '}';
     }
 
-    public Recipe(String recipeName, String id, int rating, String [] ingredients) {
+    public Recipe(String recipeName, String id, int rating, String [] ingredients, Object attributes) {
 
 		this.recipeName = recipeName;
 		this.id = id;
 		this.rating = rating;
 		this.ingredients = ingredients;
+		this.attributes = attributes;
 	}
 
 	public String getRecipeName() {
@@ -35,5 +37,7 @@ public class Recipe {
 	}
 
 	public String [] getIngredients() {return ingredients;}
+
+	public Object getAttributes(){return  attributes;}
 
 }

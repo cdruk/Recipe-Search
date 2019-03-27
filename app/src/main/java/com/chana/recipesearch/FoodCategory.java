@@ -19,6 +19,7 @@ public enum FoodCategory {
     KOSHER("shrimp", "crab", "lobster", "clam", "oyster",
             "bacon", "pork", "ham", "pepperoni", "sausage");
 
+
     @VisibleForTesting
     private List<String> prohibitedIngredients;
 
@@ -39,9 +40,9 @@ public enum FoodCategory {
     }
 
     public boolean isProhibited(String ingredient) {
-        for (String prohibitedIngredient: prohibitedIngredients) {
-            Pattern p = Pattern.compile("\\b"+prohibitedIngredient+"\\b", Pattern.CASE_INSENSITIVE);
-            if (p.matcher(ingredient).find()){
+        for (String prohibitedIngredient : prohibitedIngredients) {
+            Pattern p = Pattern.compile("\\b" + prohibitedIngredient + "\\b", Pattern.CASE_INSENSITIVE);
+            if (p.matcher(ingredient).find()) {
                 return true;
             }
         }
@@ -62,5 +63,39 @@ public enum FoodCategory {
         excluded.addAll(prohibitedIngredients);
 
         return excluded.toArray(new String[0]);
+    }
+
+    public boolean isMilk(String ingredient) {
+        for (String prohibitedIngredient : MEAT.prohibitedIngredients) {
+            Pattern p = Pattern.compile("\\b" + prohibitedIngredient + "\\b", Pattern.CASE_INSENSITIVE);
+            if (p.matcher(ingredient).find()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isMeat(String ingredient) {
+        for (String prohibitedIngredient : MILK.prohibitedIngredients) {
+            Pattern p = Pattern.compile("\\b" + prohibitedIngredient + "\\b", Pattern.CASE_INSENSITIVE);
+            if (p.matcher(ingredient).find()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isMilkAndMeat(String[] ingredients) {
+        boolean milk = false;
+        boolean meat = false;
+        for (String ingredient : ingredients) {
+            if (isMilk(ingredient)) {
+                milk = true;
+            }
+            if (isMeat(ingredient)){
+                meat = true;
+            }
+        }
+        return milk && meat;
     }
 }

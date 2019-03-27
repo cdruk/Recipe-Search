@@ -9,6 +9,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.chana.recipesearch.FoodCategory.KOSHER;
+import static com.chana.recipesearch.FoodCategory.MILK;
 
 public class RecipeClient {
 
@@ -25,8 +26,8 @@ public class RecipeClient {
                 .map(RecipeFeedModel::getMatches);
     }
 
-    Single<List<Recipe>> getAllRecipes(String recipeQuery, FoodCategory category) {
-        return service.getAllRecipes(recipeQuery, category.excluded())
+    Single<List<Recipe>> getSearchRecipes(String recipeQuery, FoodCategory category) {
+        return service.getSearchRecipes(recipeQuery, category.excluded())
                 .map(RecipeFeedModel::getMatches)
                 .map(list -> {
                     List<Recipe> kosherRecipes = new ArrayList<Recipe>();
@@ -42,6 +43,22 @@ public class RecipeClient {
                 );
     }
 
+    Single<List<Recipe>> getCourseRecipes(Course course) {
+        return service.getCourseRecipes(course.getSearchCriteria(), KOSHER.excluded(), 20)
+                .map(RecipeFeedModel::getMatches)
+                .map(list -> {
+                            List<Recipe> kosherRecipes = new ArrayList<Recipe>();
+                            for (Recipe recipe : list) {
+                                // loop through the recipes, get ingredients, remove anything that isn't kosher
+                                String[] ingredients = recipe.getIngredients();
+                                if (!KOSHER.isProhibited(ingredients) && !KOSHER.isMilkAndMeat(ingredients)) {
+                                    kosherRecipes.add(recipe);
+                                }
+                            }
+                            return kosherRecipes;
+                        }
+                );
+    }
 
     Single<RecipeModel> getRecipeDetails(String recipeId) {
         return service.getRecipeDetails(recipeId);

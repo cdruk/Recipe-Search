@@ -1,5 +1,6 @@
 package com.chana.recipesearch;
 
+import static com.chana.recipesearch.FoodCategory.KOSHER;
 import static com.chana.recipesearch.FoodCategory.MILK;
 import static org.junit.Assert.*;
 
@@ -23,14 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecipeServiceTest {
 
-//	Retrofit retrofit = new Retrofit.Builder()
-//			.baseUrl("http://api.yummly.com/v1/api/")
-//			.addConverterFactory(GsonConverterFactory.create())
-//			.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//			.build();
-//
-//	RecipeService service = retrofit.create(RecipeService.class);
-
     RecipeClient recipeClient = new RecipeClient();
 
     @Test
@@ -47,11 +40,11 @@ public class RecipeServiceTest {
     }
 
     @Test
-    public void testGetAllRecipes() throws IOException {
+    public void testGetSearchRecipes() throws IOException {
         // given
 
         // when
-        TestObserver<List<Recipe>> observer = recipeClient.getAllRecipes("lasagna", MILK)
+        TestObserver<List<Recipe>> observer = recipeClient.getSearchRecipes("lasagna", MILK)
                 .test();
 
         // then
@@ -64,6 +57,19 @@ public class RecipeServiceTest {
         assertEquals("Bertolli-lasagna-304071", recipes.get(5).getId());
         assertEquals("Lasagna-Rounds-1060438", recipes.get(6).getId());
         assertEquals("Spinach-Lasagna-Rolls-2254756", recipes.get(7).getId());
+    }
+
+    @Test
+    public void testGetCourseRecipes() throws IOException {
+        // given
+
+        // when
+        TestObserver<List<Recipe>> observer = recipeClient.getCourseRecipes (Course.APPETIZERS)
+                .test();
+
+        // then
+        List<Recipe> recipes = observer.values().get(0);
+        assertNotNull(recipes);
     }
 
 	@Test
