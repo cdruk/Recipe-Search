@@ -56,11 +56,34 @@ public class FoodCategoryTest {
 
         assertFalse(KOSHER.isProhibited(ingredient));
     }
+
     @Test
     public void testFoodCategory(){
 
         assertTrue(PARVE.getProhibitedIngredients().containsAll(MILK.getProhibitedIngredients()));
         assertTrue(PARVE.getProhibitedIngredients().containsAll(MEAT.getProhibitedIngredients()));
 
+    }
+
+    @Test
+    public void testIsMeat(){
+        assertTrue(KOSHER.isMeat("beef"));
+    }
+
+    @Test
+    public void testIsMilk(){
+        assertTrue(KOSHER.isMilk("ice cream"));
+    }
+
+    @Test
+    public void testIsMeatAndMilk(){
+        String [] ingredients = {"egg","butter","chicken"};
+        assertTrue(KOSHER.isMilkAndMeat(ingredients));
+    }
+
+    @Test
+    public void testIsNotMeatAndMilk(){
+        String [] ingredients = {"egg","butter","cheese"};
+        assertFalse(KOSHER.isMilkAndMeat(ingredients));
     }
 }
