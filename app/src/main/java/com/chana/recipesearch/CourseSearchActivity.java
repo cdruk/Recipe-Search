@@ -31,11 +31,10 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         Course course = (Course) getIntent().getSerializableExtra("course");
 
-
         client.getCourseRecipes(course)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::setCourseRecipes, ::onError();)
+            .subscribe(::setCourseRecipes, ::onError)
 //        mCourseSearchAdapter = new CourseSearchAdapter(courses, this);
 //        recyclerView.setAdapter(mCourseSearchAdapter);
     }
