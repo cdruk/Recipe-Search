@@ -29,9 +29,19 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         Course course = (Course) getIntent().getSerializableExtra("course");
 
-        Single<List<Recipe>> courseRecipes = client.getCourseRecipes(course);
-        courseRecipes.subscribe()
+        client.getCourseRecipes(course)
+            .subscribeOn(Schedulers.io())
+            .observerOn(AndroidSchedulers.mainThread())
+            .subscribe(::setCourseRecipes, ::onError);
 //        mCourseSearchAdapter = new CourseSearchAdapter(courses, this);
 //        recyclerView.setAdapter(mCourseSearchAdapter);
+    }
+    
+    private void setCourseRecipes(List<Recipe> list) {
+        // display the list of recipes
+    }
+    
+    private void onError(Throwable t) {
+        t.printStackTrace();
     }
 }
