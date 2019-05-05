@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class CourseSearchActivity extends AppCompatActivity {
 
@@ -29,10 +31,11 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         Course course = (Course) getIntent().getSerializableExtra("course");
 
+
         client.getCourseRecipes(course)
             .subscribeOn(Schedulers.io())
-            .observerOn(AndroidSchedulers.mainThread())
-            .subscribe(::setCourseRecipes, ::onError);
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(::setCourseRecipes, ::onError();)
 //        mCourseSearchAdapter = new CourseSearchAdapter(courses, this);
 //        recyclerView.setAdapter(mCourseSearchAdapter);
     }
