@@ -34,7 +34,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         int courseImage_id = courses.get(position).getCourseImage();
-        holder.course.setImageResource(courseImage_id);
+        holder.course_image.setImageResource(courseImage_id);
         holder.courseTitle.setText( courses.get(position).getSearchCriteria());
     }
 
@@ -45,7 +45,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     public static class  CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        ImageView course;
+        ImageView course_image;
         TextView courseTitle;
 //        int [] courseImages;
 //        String [] courseTitles;
@@ -59,7 +59,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             this.courses = courses;
             this.context = context;
             itemView.setOnClickListener(this);
-            course = itemView.findViewById(R.id.course);
+            course_image = itemView.findViewById(R.id.course_image);
             courseTitle = itemView.findViewById(R.id.course_title);
 
         }
@@ -70,7 +70,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             Course course = this.courses.get(position);
 
             Intent intent = new Intent(this.context, CourseSearchActivity.class);
-            intent.putExtra("course", course);
+            intent.putExtra("course_image", course);
             this.context.startActivity(intent);
         }
     }

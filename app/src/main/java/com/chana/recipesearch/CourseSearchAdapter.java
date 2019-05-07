@@ -1,49 +1,86 @@
 package com.chana.recipesearch;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.List;
 
 public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapter.CourseSearchViewHolder>{
+
+    private List<Recipe> recipes;
+    Context context;
+
+    public CourseSearchAdapter(List<Recipe> recipes, Context context){
+        this.recipes = recipes;
+        this.context = context;
+    }
 
     @NonNull
     @Override
     public CourseSearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recipe_layout, parent, false);
+        CourseSearchAdapter.CourseSearchViewHolder courseSearchViewHolder =
+                new CourseSearchAdapter.CourseSearchViewHolder(view, context, recipes);
+        return courseSearchViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseSearchAdapter.CourseSearchViewHolder holder, int position) {
-
+            String recipe_image = recipes.get(position).getImage();
+            holder.recipe_image.setImageDrawable(LoadImageFromWeb(recipe_image));
+            holder.recipeName.setText( recipes.get(position).getRecipeName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return recipes.size();
     }
+
+    public static Drawable LoadImageFromWeb(String url) {
+        try {
+            InputStream inputStream = (InputStream) new URL(url).getContent();
+            return Drawable.createFromStream(inputStream, "src name");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     public static class  CourseSearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        ImageView course;
-        TextView courseTitle;
-        ArrayList<Course> courses;
+        ImageView recipe_image;
+        TextView recipeName;
+        List<Recipe> recipes;
         Context context;
 
-        public CourseSearchViewHolder(@NonNull View itemView, Context context, ArrayList<Course> courses) {
+        public CourseSearchViewHolder(@NonNull View itemView, Context context, List<Recipe> recipes) {
             super(itemView);
-            this.courses = courses;
+            this.recipes = recipes;
             this.context = context;
             itemView.setOnClickListener(this);
-            course = itemView.findViewById(R.id.course);
-            courseTitle = itemView.findViewById(R.id.course_title);
+            recipe_image = itemView.findViewById(R.id.recipe_image);
+            recipeName = itemView.findViewById(R.id.recipe_name);
 
+//        if (currentArticle != null) {
+//            Picasso.with(this.getContext())
+//                    .load(currentArticle.getmImageUrl())
+//                    .centerCrop()
+//                    .transform(new CircleTransform(50,0))
+//                    .fit()
+//                    .into(recipe);
+// }
         }
 
         @Override

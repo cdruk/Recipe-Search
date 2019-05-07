@@ -14,7 +14,7 @@ public enum FoodCategory {
     MEAT("milk", "cream", "butter", "half and half", "cheese",
             "mozzarella", "parmesan"),
     MILK("beef", "chicken", "lamb", "meat", "turkey", "veal",
-            "salami", "pastrami"),
+            "salami", "pastrami", "meatballs"),
     PARVE(MEAT, MILK),
     KOSHER("shrimp", "crab", "lobster", "clam", "oyster",
             "bacon", "pork", "ham", "pepperoni", "sausage");
