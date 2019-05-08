@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:gravity="center"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:id="@+id/recipe_name"/>
 

@@ -12,9 +12,9 @@ import java.util.regex.Pattern;
 public enum FoodCategory {
     // contains a list of milk products
     MEAT("milk", "cream", "butter", "half and half", "cheese",
-            "mozzarella", "parmesan"),
+            "mozzarella", "parmesan", "cheddar", "queso"),
     MILK("beef", "chicken", "lamb", "meat", "turkey", "veal",
-            "salami", "pastrami", "meatballs"),
+            "salami", "pastrami", "meatballs", "burger", "hamburger", "meatball"),
     PARVE(MEAT, MILK),
     KOSHER("shrimp", "crab", "lobster", "clam", "oyster",
             "bacon", "pork", "ham", "pepperoni", "sausage");

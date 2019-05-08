@@ -1,6 +1,7 @@
 package com.chana.recipesearch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -75,20 +76,17 @@ public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapte
             itemView.setOnClickListener(this);
             recipe_image = itemView.findViewById(R.id.recipe_image);
             recipeName = itemView.findViewById(R.id.recipe_name);
-
-//        if (currentArticle != null) {
-//            Picasso.with(this.getContext())
-//                    .load(currentArticle.getmImageUrl())
-//                    .centerCrop()
-//                    .transform(new CircleTransform(50,0))
-//                    .fit()
-//                    .into(recipe);
-// }
         }
 
         @Override
         public void onClick(View view) {
+            int position = getAdapterPosition();
+            Recipe recipe = this.recipes.get(position);
 
+            Intent intent = new Intent(this.context, RecipeDetailsActivity.class);
+            intent.putExtra("recipe_id", recipe.getId());
+            intent.putExtra("recipe_name", recipe.getRecipeName());
+            this.context.startActivity(intent);
         }
     }
 }

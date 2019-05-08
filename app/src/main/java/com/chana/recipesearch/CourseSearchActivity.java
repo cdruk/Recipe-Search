@@ -14,10 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CourseSearchActivity extends AppCompatActivity {
 
-    private TextView searchName;
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private CourseSearchAdapter mCourseSearchAdapter;
 
     private RecipeClient client = new RecipeClient();
 
@@ -25,14 +22,14 @@ public class CourseSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_search);
-        searchName = findViewById(R.id.course_search);
+        TextView searchName = findViewById(R.id.course_search);
         recyclerView = findViewById(R.id.recipe_view);
 
-        layoutManager = new GridLayoutManager(this, 2);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        Course course = (Course) getIntent().getSerializableExtra("course_image");
+        Course course = (Course) getIntent().getSerializableExtra("course");
 
         searchName.setText(course.getSearchCriteria());
 
@@ -43,12 +40,8 @@ public class CourseSearchActivity extends AppCompatActivity {
     }
     
     private void setCourseRecipes(List<Recipe> list) {
-        // display the list of recipes
-        System.out.println("recipies" + list);
-
-        mCourseSearchAdapter = new CourseSearchAdapter(list, this);
+        CourseSearchAdapter mCourseSearchAdapter = new CourseSearchAdapter(list, this);
         recyclerView.setAdapter(mCourseSearchAdapter);
-
     }
     
     private void onError(Throwable t) {

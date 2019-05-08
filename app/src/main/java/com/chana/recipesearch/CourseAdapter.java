@@ -70,7 +70,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             Course course = this.courses.get(position);
 
             Intent intent = new Intent(this.context, CourseSearchActivity.class);
-            intent.putExtra("course_image", course);
+            intent.putExtra("course", course);
             this.context.startActivity(intent);
         }
     }
