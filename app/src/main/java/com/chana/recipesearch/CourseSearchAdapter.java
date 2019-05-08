@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -39,7 +39,10 @@ public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapte
     @Override
     public void onBindViewHolder(@NonNull CourseSearchAdapter.CourseSearchViewHolder holder, int position) {
             String recipe_image = recipes.get(position).getImage();
-            holder.recipe_image.setImageDrawable(LoadImageFromWeb(recipe_image));
+            Glide.with(context)
+                    .load(recipe_image).into(holder.recipe_image);
+
+        //holder.recipe_image.setImageDrawable(LoadImageFromWeb(recipe_image));
             holder.recipeName.setText( recipes.get(position).getRecipeName());
     }
 
