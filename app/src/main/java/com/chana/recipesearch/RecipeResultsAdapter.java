@@ -13,37 +13,35 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
-public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapter.CourseSearchViewHolder>{
+public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdapter.RecipeResultsViewHolder>{
 
     private List<Recipe> recipes;
     Context context;
 
-    public CourseSearchAdapter(List<Recipe> recipes, Context context){
+    public RecipeResultsAdapter(List<Recipe> recipes, Context context){
         this.recipes = recipes;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public CourseSearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecipeResultsAdapter.RecipeResultsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recipe_layout, parent, false);
-        CourseSearchAdapter.CourseSearchViewHolder courseSearchViewHolder =
-                new CourseSearchAdapter.CourseSearchViewHolder(view, context, recipes);
-        return courseSearchViewHolder;
+        RecipeResultsAdapter.RecipeResultsViewHolder recipeResultsViewHolder =
+                new RecipeResultsAdapter.RecipeResultsViewHolder(view, context, recipes);
+        return recipeResultsViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseSearchAdapter.CourseSearchViewHolder holder, int position) {
-            String recipe_image = recipes.get(position).getImage();
-            Glide.with(context)
-                    .load(recipe_image).into(holder.recipe_image);
+    public void onBindViewHolder(@NonNull RecipeResultsAdapter.RecipeResultsViewHolder holder, int position) {
+        String recipe_image = recipes.get(position).getImage();
+        Glide.with(context)
+                .load(recipe_image).into(holder.recipe_image);
 
-            holder.recipeName.setText( recipes.get(position).getRecipeName());
+        holder.recipeName.setText( recipes.get(position).getRecipeName());
     }
 
     @Override
@@ -51,15 +49,14 @@ public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapte
         return recipes.size();
     }
 
-
-    public static class  CourseSearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class  RecipeResultsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView recipe_image;
         TextView recipeName;
         List<Recipe> recipes;
         Context context;
 
-        public CourseSearchViewHolder(@NonNull View itemView, Context context, List<Recipe> recipes) {
+        public RecipeResultsViewHolder(@NonNull View itemView, Context context, List<Recipe> recipes) {
             super(itemView);
             this.recipes = recipes;
             this.context = context;
