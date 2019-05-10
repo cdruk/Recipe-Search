@@ -50,9 +50,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     }
 
     private void setupActionBar(String recipeName) {
-        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        ActionBar actionBar = getSupportActionBar();
+        Objects.requireNonNull(actionBar).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
 
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
         TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         title.setText(recipeName);
     }
@@ -62,7 +64,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         Glide.with(this).load(recipeModel.getImage()).fitCenter().into(recipeImage);
         viewRecipeButton.setOnClickListener(view -> {
             Intent browserIntent =
-                    new Intent(Intent.ACTION_VIEW, Uri.parse(recipeModel.getAttribution().getUrl()));
+                    new Intent(Intent.ACTION_VIEW, Uri.parse(recipeModel.getSource().getSourceRecipeUrl()));
             startActivity(browserIntent);
         });
     }

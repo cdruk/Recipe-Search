@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -18,10 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CourseSearchActivity" />
-        <activity android:name=".RecipeDetailsActivity" />
-        <activity android:name=".RecipeSearchActivity" />
-        <activity android:name=".RecipeResultsActivity"></activity>
+        <activity android:name=".CourseSearchActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".RecipeSearchActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".RecipeResultsActivity"
+            android:parentActivityName=".RecipeSearchActivity"/>
+        <activity android:name=".RecipeDetailsActivity"
+            android:parentActivityName=".RecipeResultsActivity"/>
+
     </application>
 
 </manifest>

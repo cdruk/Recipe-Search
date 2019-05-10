@@ -2,21 +2,22 @@ package com.chana.recipesearch;
 
 import com.google.gson.internal.LinkedTreeMap;
 
+
 public class RecipeModel {
 
-	private Attribution attribution;
+	private Source source;
 	private String[] ingredientLines;
 	private Object[] images;
 
-	public RecipeModel(Attribution attribution, String[] ingredientLines, String [] images) {
+	public RecipeModel(Source source, String[] ingredientLines, String [] images) {
 		super();
-		this.attribution = attribution;
+		this.source = source;
 		this.ingredientLines = ingredientLines;
 		this.images = images;
 	}
 
-	public Attribution getAttribution() {
-		return attribution;
+	public Source getSource() {
+		return source;
 	}
 
 	public String[] getIngredientLines() {

@@ -50,9 +50,11 @@ public class RecipeSearchActivity extends AppCompatActivity {
     }
 
     private void setupActionBar() {
-        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        ActionBar actionBar = getSupportActionBar();
+        Objects.requireNonNull(actionBar).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
 
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
         TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         title.setText(R.string.find_a_recipe_for);
     }

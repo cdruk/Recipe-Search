@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         setupActionBar(course.getSearchCriteria());
 
+
         client.getCourseRecipes(course)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -41,9 +43,11 @@ public class CourseSearchActivity extends AppCompatActivity {
     }
 
     private void setupActionBar(String courseName) {
-        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        ActionBar actionBar = getSupportActionBar();
+        Objects.requireNonNull(actionBar).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
 
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
         TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         title.setText(courseName);
     }
