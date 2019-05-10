@@ -6,22 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/course_explorer"
-    android:text="@string/course_explorer"
-    android:paddingVertical="8dp"
-    android:textSize="24dp"
-    android:textStyle="bold"
-    android:textColor="@color/colorPrimaryDark"
-    android:gravity="center"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/course_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/course_explorer" />
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/open_recipe_search"

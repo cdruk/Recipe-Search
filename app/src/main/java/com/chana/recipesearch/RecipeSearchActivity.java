@@ -2,14 +2,17 @@ package com.chana.recipesearch;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -28,6 +31,7 @@ public class RecipeSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_search);
+        setupActionBar();
 
         searchQuery = findViewById(R.id.search_query);
 
@@ -45,15 +49,23 @@ public class RecipeSearchActivity extends AppCompatActivity {
         });
     }
 
+    private void setupActionBar() {
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
+
+        TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        title.setText(R.string.find_a_recipe_for);
+    }
+
     private FoodCategory getCategory() {
         FoodCategory category = FoodCategory.KOSHER;
-        if (meat.isChecked()){
+        if (meat.isChecked()) {
             category = FoodCategory.MEAT;
         }
-        if (milk.isChecked()){
+        if (milk.isChecked()) {
             category = FoodCategory.MILK;
         }
-        if (parve.isChecked()){
+        if (parve.isChecked()) {
             category = FoodCategory.PARVE;
         }
         return category;

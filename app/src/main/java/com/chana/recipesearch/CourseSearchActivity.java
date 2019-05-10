@@ -1,5 +1,6 @@
 package com.chana.recipesearch;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -22,7 +24,6 @@ public class CourseSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_search);
-        TextView searchName = findViewById(R.id.course_search);
         recyclerView = findViewById(R.id.recipe_view);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -31,14 +32,22 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         Course course = (Course) getIntent().getSerializableExtra("course");
 
-        searchName.setText(course.getSearchCriteria());
+        setupActionBar(course.getSearchCriteria());
 
         client.getCourseRecipes(course)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::setCourseRecipes, this::onError);
     }
-    
+
+    private void setupActionBar(String courseName) {
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
+
+        TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        title.setText(courseName);
+    }
+
     private void setCourseRecipes(List<Recipe> list) {
         CourseSearchAdapter mCourseSearchAdapter = new CourseSearchAdapter(list, this);
         recyclerView.setAdapter(mCourseSearchAdapter);

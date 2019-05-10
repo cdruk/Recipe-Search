@@ -8,17 +8,6 @@
 android:orientation="vertical"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search"
-        android:paddingVertical="8dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:text="@string/find_a_recipe_for"/>
-
     <EditText
         android:id="@+id/search_query"
         android:layout_width="wrap_content"

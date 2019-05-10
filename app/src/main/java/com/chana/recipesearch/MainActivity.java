@@ -3,14 +3,17 @@ package com.chana.recipesearch;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
+        setupActionBar();
+
         setupFab();
         setupCourses();
 
@@ -37,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         mCourseAdapter = new CourseAdapter(courses, this);
         recyclerView.setAdapter(mCourseAdapter);
 
+    }
+
+    private void setupActionBar() {
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
+
+        TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        title.setText(R.string.course_explorer);
     }
 
     private void setupFab() {
