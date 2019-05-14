@@ -45,7 +45,7 @@ public class CourseSearchActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (!recyclerView.canScrollVertically(1)) {
                     start += 30;
-                   requestRecipes(course, start  );
+                   requestRecipes(course, start);
                 }
             }
         });
@@ -79,8 +79,7 @@ public class CourseSearchActivity extends AppCompatActivity {
     private void setCourseRecipes(List<Recipe> list) {
         mCourseSearchAdapter.getRecipes().addAll(list);
         mCourseSearchAdapter.notifyDataSetChanged();
-
-    }
+        }
 
     private void onError(Throwable t) {
         t.printStackTrace();

@@ -3,10 +3,8 @@ package com.chana.recipesearch;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -20,8 +18,11 @@ import io.reactivex.schedulers.Schedulers;
 public class RecipeResultsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-
+    private RecipeResultsAdapter mRecipeResultsAdapter;
     private RecipeClient client = new RecipeClient();
+
+    private int start = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +39,20 @@ public class RecipeResultsActivity extends AppCompatActivity {
 
         setupActionBar(query);
 
-        client.getSearchRecipes(query, category)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::setSearchResults, this::onError);
+        mRecipeResultsAdapter = new RecipeResultsAdapter( this);
+        recyclerView.setAdapter(mRecipeResultsAdapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1)) {
+                    start += 30;
+                    requestRecipes(query,category,start);
+                }
+            }
+        });
+
+        requestRecipes(query, category, start);
     }
 
     @Override
@@ -60,9 +71,17 @@ public class RecipeResultsActivity extends AppCompatActivity {
         actionBar.setTitle(query);
     }
 
+    private void requestRecipes(String query, FoodCategory category, int start) {
+        client.getSearchRecipes(query, category, start)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setSearchResults, this::onError);
+    }
+
     private void setSearchResults(List<Recipe> recipes) {
-        RecipeResultsAdapter mRecipeResultsAdapter = new RecipeResultsAdapter(recipes, this);
-        recyclerView.setAdapter(mRecipeResultsAdapter);
+        mRecipeResultsAdapter.getRecipes().addAll(recipes);
+        mRecipeResultsAdapter.notifyDataSetChanged();
+
     }
 
     private void onError(Throwable t) {

@@ -26,8 +26,8 @@ public class RecipeClient {
                 .map(RecipeFeedModel::getMatches);
     }
 
-    Single<List<Recipe>> getSearchRecipes(String recipeQuery, FoodCategory category) {
-        return service.getSearchRecipes(recipeQuery, category.excluded(), 1, 30)
+    Single<List<Recipe>> getSearchRecipes(String recipeQuery, FoodCategory category, int start) {
+        return service.getSearchRecipes(recipeQuery, category.excluded(), start, 30)
                 .map(RecipeFeedModel::getMatches)
                 .map(list -> {
                     List<Recipe> kosherRecipes = new ArrayList<Recipe>();

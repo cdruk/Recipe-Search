@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -21,9 +22,14 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
     private List<Recipe> recipes;
     Context context;
 
-    public RecipeResultsAdapter(List<Recipe> recipes, Context context){
-        this.recipes = recipes;
+    public RecipeResultsAdapter(Context context){
         this.context = context;
+        recipes = new ArrayList<Recipe>();
+
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
     }
 
     @NonNull
