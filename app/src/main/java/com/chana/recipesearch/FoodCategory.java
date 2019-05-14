@@ -1,6 +1,5 @@
 package com.chana.recipesearch;
 
-import android.support.annotation.VisibleForTesting;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -8,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import androidx.annotation.VisibleForTesting;
 
 public enum FoodCategory {
     // contains a list of milk products

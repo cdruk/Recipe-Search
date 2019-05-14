@@ -1,16 +1,18 @@
 package com.chana.recipesearch;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.List;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -18,8 +20,8 @@ import io.reactivex.schedulers.Schedulers;
 public class CourseSearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-
     private RecipeClient client = new RecipeClient();
+    private CourseSearchAdapter mCourseSearchAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,28 +37,37 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         setupActionBar(course.getSearchCriteria());
 
+        mCourseSearchAdapter = new CourseSearchAdapter(this);
+        recyclerView.setAdapter(mCourseSearchAdapter);
 
-        client.getCourseRecipes(course)
+        client.getCourseRecipes(course, 0)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::setCourseRecipes, this::onError);
     }
 
-    private void setupActionBar(String courseName) {
-        ActionBar actionBar = getSupportActionBar();
-        Objects.requireNonNull(actionBar).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.action_bar);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
-        TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
-        title.setText(courseName);
+    private void setupActionBar(String courseName) {
+       @NonNull ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(courseName);
     }
 
     private void setCourseRecipes(List<Recipe> list) {
-        CourseSearchAdapter mCourseSearchAdapter = new CourseSearchAdapter(list, this);
-        recyclerView.setAdapter(mCourseSearchAdapter);
+        mCourseSearchAdapter.getRecipes().addAll(list);
+        mCourseSearchAdapter.notifyDataSetChanged();
     }
-    
+
+
     private void onError(Throwable t) {
         t.printStackTrace();
     }

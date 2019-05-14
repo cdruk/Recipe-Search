@@ -3,8 +3,6 @@ package com.chana.recipesearch;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +13,24 @@ import com.bumptech.glide.Glide;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapter.CourseSearchViewHolder>{
 
     private List<Recipe> recipes;
     Context context;
 
-    public CourseSearchAdapter(List<Recipe> recipes, Context context){
-        this.recipes = recipes;
+    public CourseSearchAdapter(Context context){
         this.context = context;
+        recipes = new ArrayList<Recipe>();
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
     }
 
     @NonNull

@@ -16,14 +16,14 @@ public interface RecipeService {
 	@GET("recipes" + arguments)
 	Single<RecipeFeedModel> getSearchRecipes(@Query("q") String recipeQuery ,
 											 @Query("excludedIngredient[]") String [] excluded,
-                                             @Query("maxResult") int resultCount,
-                                             @Query("start") int start);
+											 @Query("start") int start,
+											 @Query("maxResult") int resultCount);
 
 	@GET("recipes" + arguments)
 	Single<RecipeFeedModel> getCourseRecipes(@Query("q") String course,
 											 @Query("excludedIngredient[]") String [] excluded,
-											 @Query("maxResult") int resultCount,
-											 @Query("start") int start);
+											 @Query("start") int start,
+											 @Query("maxResult") int resultCount);
 
 	@GET("recipe/{recipe-id}" + arguments)
 	Single<RecipeModel> getRecipeDetails(@Path("recipe-id") String recipeId);

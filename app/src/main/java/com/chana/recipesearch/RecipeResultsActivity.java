@@ -1,16 +1,18 @@
 package com.chana.recipesearch;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -42,13 +44,9 @@ public class RecipeResultsActivity extends AppCompatActivity {
     }
 
     private void setupActionBar(String query) {
-        ActionBar actionBar = getSupportActionBar();
-        Objects.requireNonNull(actionBar).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.action_bar);
-
-        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
-        TextView title = (TextView) getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
-        title.setText(query);
+        @NonNull ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(query);
     }
 
     private void setSearchResults(List<Recipe> recipes) {

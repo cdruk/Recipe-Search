@@ -1,6 +1,7 @@
 package com.chana.recipesearch;
 
-import android.support.annotation.VisibleForTesting;
+
+import androidx.annotation.VisibleForTesting;
 
 public enum Course {
     APPETIZERS("Appetizers", R.drawable.appetizer),
