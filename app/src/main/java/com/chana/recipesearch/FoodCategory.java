@@ -1,6 +1,5 @@
 package com.chana.recipesearch;
 
-import android.support.annotation.VisibleForTesting;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -9,15 +8,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import androidx.annotation.VisibleForTesting;
+
 public enum FoodCategory {
     // contains a list of milk products
     MEAT("milk", "cream", "butter", "half and half", "cheese",
-            "mozzarella", "parmesan"),
+            "mozzarella", "parmesan", "cheddar", "queso"),
     MILK("beef", "chicken", "lamb", "meat", "turkey", "veal",
-            "salami", "pastrami"),
+            "salami", "pastrami", "meatballs", "burger", "hamburger", "meatball"),
     PARVE(MEAT, MILK),
     KOSHER("shrimp", "crab", "lobster", "clam", "oyster",
-            "bacon", "pork", "ham", "pepperoni", "sausage");
+            "bacon", "pork", "ham", "pepperoni", "sausage", "cuttlefish", "calamari");
 
 
     @VisibleForTesting

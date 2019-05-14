@@ -1,6 +1,5 @@
 package com.chana.recipesearch;
 
-import static com.chana.recipesearch.FoodCategory.KOSHER;
 import static com.chana.recipesearch.FoodCategory.MILK;
 import static org.junit.Assert.*;
 
@@ -9,20 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.chana.recipesearch.Recipe;
-import com.chana.recipesearch.RecipeFeedModel;
-import com.chana.recipesearch.RecipeService;
-
-import io.reactivex.Observer;
-import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RecipeServiceTest {
+public class RecipeClientTest {
 
     RecipeClient recipeClient = new RecipeClient();
 
@@ -82,7 +70,7 @@ public class RecipeServiceTest {
 
 		// then
         RecipeModel model = observer.values().get(0);
-		Attribution details = model.getAttribution();
+		Source details = model.getSource();
 		assertNotNull(details);
 	}
 

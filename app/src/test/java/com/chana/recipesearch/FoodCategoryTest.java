@@ -77,7 +77,7 @@ public class FoodCategoryTest {
 
     @Test
     public void testIsMeatAndMilk(){
-        String [] ingredients = {"egg","butter","chicken"};
+        String [] ingredients = {"egg","mozzarella","beef mince"};
         assertTrue(KOSHER.isMilkAndMeat(ingredients));
     }
 
@@ -85,5 +85,11 @@ public class FoodCategoryTest {
     public void testIsNotMeatAndMilk(){
         String [] ingredients = {"egg","butter","cheese"};
         assertFalse(KOSHER.isMilkAndMeat(ingredients));
+    }
+
+    @Test
+    public void isCapitalizedMeatAndMilk(){
+        String [] ingredients = {"Queso", "meatballs"};
+        assertTrue(KOSHER.isMilkAndMeat(ingredients));
     }
 }
