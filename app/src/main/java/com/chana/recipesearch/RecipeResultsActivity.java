@@ -2,6 +2,7 @@ package com.chana.recipesearch;
 
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.List;
@@ -41,6 +42,16 @@ public class RecipeResultsActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setSearchResults, this::onError);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupActionBar(String query) {

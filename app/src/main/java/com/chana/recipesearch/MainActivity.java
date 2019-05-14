@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupActionBar() {
         @NonNull ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.course_explorer);
     }
 

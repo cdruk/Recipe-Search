@@ -3,6 +3,7 @@ package com.chana.recipesearch;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -48,6 +49,16 @@ public class RecipeSearchActivity extends AppCompatActivity {
             intent.putExtra("category", getCategory());
             this.startActivity(intent);
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupActionBar() {

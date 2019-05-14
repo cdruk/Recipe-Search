@@ -65,6 +65,7 @@ public class CourseSearchActivity extends AppCompatActivity {
     private void setCourseRecipes(List<Recipe> list) {
         mCourseSearchAdapter.getRecipes().addAll(list);
         mCourseSearchAdapter.notifyDataSetChanged();
+
     }
 
 
