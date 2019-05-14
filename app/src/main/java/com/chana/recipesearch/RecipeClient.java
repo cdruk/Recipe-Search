@@ -27,7 +27,7 @@ public class RecipeClient {
     }
 
     Single<List<Recipe>> getSearchRecipes(String recipeQuery, FoodCategory category) {
-        return service.getSearchRecipes(recipeQuery, category.excluded())
+        return service.getSearchRecipes(recipeQuery, category.excluded(), 30, 1000)
                 .map(RecipeFeedModel::getMatches)
                 .map(list -> {
                     List<Recipe> kosherRecipes = new ArrayList<Recipe>();
@@ -44,7 +44,7 @@ public class RecipeClient {
     }
 
     Single<List<Recipe>> getCourseRecipes(Course course) {
-        return service.getCourseRecipes(course.getSearchCriteria(), KOSHER.excluded(), 30)
+        return service.getCourseRecipes(course.getSearchCriteria(), KOSHER.excluded(), 30, 1000)
                 .map(RecipeFeedModel::getMatches)
                 .map(list -> {
                             List<Recipe> kosherRecipes = new ArrayList<Recipe>();

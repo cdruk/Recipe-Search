@@ -70,7 +70,7 @@ public class RecipeClientTest {
 
 		// then
         RecipeModel model = observer.values().get(0);
-		Source details = model.getAttribution();
+		Source details = model.getSource();
 		assertNotNull(details);
 	}
 

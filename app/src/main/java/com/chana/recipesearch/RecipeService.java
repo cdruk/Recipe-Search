@@ -15,12 +15,15 @@ public interface RecipeService {
 
 	@GET("recipes" + arguments)
 	Single<RecipeFeedModel> getSearchRecipes(@Query("q") String recipeQuery ,
-											 @Query("excludedIngredient[]") String [] excluded );
+											 @Query("excludedIngredient[]") String [] excluded,
+                                             @Query("maxResult") int resultCount,
+                                             @Query("start") int start);
 
 	@GET("recipes" + arguments)
 	Single<RecipeFeedModel> getCourseRecipes(@Query("q") String course,
 											 @Query("excludedIngredient[]") String [] excluded,
-											 @Query("maxResult") int resultCount);
+											 @Query("maxResult") int resultCount,
+											 @Query("start") int start);
 
 	@GET("recipe/{recipe-id}" + arguments)
 	Single<RecipeModel> getRecipeDetails(@Path("recipe-id") String recipeId);

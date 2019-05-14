@@ -17,7 +17,7 @@ public enum FoodCategory {
             "salami", "pastrami", "meatballs", "burger", "hamburger", "meatball"),
     PARVE(MEAT, MILK),
     KOSHER("shrimp", "crab", "lobster", "clam", "oyster",
-            "bacon", "pork", "ham", "pepperoni", "sausage");
+            "bacon", "pork", "ham", "pepperoni", "sausage", "cuttlefish", "calamari");
 
 
     @VisibleForTesting

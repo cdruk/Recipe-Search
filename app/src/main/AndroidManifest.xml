@@ -18,14 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CourseSearchActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".RecipeSearchActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".RecipeResultsActivity"
-            android:parentActivityName=".RecipeSearchActivity"/>
-        <activity android:name=".RecipeDetailsActivity"
-            android:parentActivityName=".RecipeResultsActivity"/>
+        <activity android:name=".CourseSearchActivity" />
+        <activity android:name=".RecipeSearchActivity" />
+        <activity android:name=".RecipeResultsActivity" />
+        <activity android:name=".RecipeDetailsActivity" />
 
     </application>
 
