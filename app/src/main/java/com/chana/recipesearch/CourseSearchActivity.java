@@ -3,7 +3,6 @@ package com.chana.recipesearch;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -22,6 +20,8 @@ public class CourseSearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecipeClient client = new RecipeClient();
     private CourseSearchAdapter mCourseSearchAdapter;
+
+    private int start = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,18 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         mCourseSearchAdapter = new CourseSearchAdapter(this);
         recyclerView.setAdapter(mCourseSearchAdapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1)) {
+                    start += 30;
+                   requestRecipes(course, start  );
+                }
+            }
+        });
 
-        client.getCourseRecipes(course, 0)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::setCourseRecipes, this::onError);
+        requestRecipes(course, start);
     }
 
     @Override
@@ -62,12 +69,18 @@ public class CourseSearchActivity extends AppCompatActivity {
         actionBar.setTitle(courseName);
     }
 
+    private void requestRecipes(Course course, int start) {
+        client.getCourseRecipes(course, start)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setCourseRecipes, this::onError);
+    }
+
     private void setCourseRecipes(List<Recipe> list) {
         mCourseSearchAdapter.getRecipes().addAll(list);
         mCourseSearchAdapter.notifyDataSetChanged();
 
     }
-
 
     private void onError(Throwable t) {
         t.printStackTrace();
