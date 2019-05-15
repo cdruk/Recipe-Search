@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">RecipeSearch</string>
+
+    <string name="app_name">Cook Kosher</string>
     <string name="course_explorer">Course Explorer</string>
     <string name="ingredients">Ingredients</string>
     <string name="get_full_recipe">Get Full Recipe</string>
@@ -8,5 +9,6 @@
     <string name="milk">Milk</string>
     <string name="parve">Parve</string>
     <string name="title_activity_test">test</string>
-    <string name="find_a_recipe_for">Find a Recipe For...</string>
+    <string name="find_a_recipe_for">Find a Recipe For…</string>
+
 </resources>
